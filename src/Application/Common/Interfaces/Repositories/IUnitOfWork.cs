@@ -1,5 +1,10 @@
-﻿namespace Application.Common.Interfaces.Repositories;
+﻿using Domain.Common.Abstractions;
 
-public interface IUnitOfWork
+namespace Application.Common.Interfaces.Repositories;
+
+public interface IUnitOfWork : IAsyncDisposable
 {
+    IGenericRepository<T> Repository<T>() where T : BaseAuditableEntity;
+    IProductRepository Products { get; }
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

@@ -1,5 +1,10 @@
-﻿namespace Application.Features.Product.Queries;
+﻿using Application.Common.Models.Pagination;
+using Application.Features.Product.Dtos;
+using MediatR;
 
-public class GetAllProductsQuery
+namespace Application.Features.Product.Queries;
+
+public record GetAllProductsQuery: IRequest<PageResponse<ProductDto>>
 {
+    public PageRequest Pagination { get; set; } = new();
 }

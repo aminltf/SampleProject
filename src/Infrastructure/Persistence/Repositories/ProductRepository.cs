@@ -1,5 +1,10 @@
-﻿namespace Infrastructure.Persistence.Repositories;
+﻿using Application.Common.Interfaces.Repositories;
+using Domain.Entities;
+using Infrastructure.Contexts;
 
-public class ProductRepository
+namespace Infrastructure.Persistence.Repositories;
+
+public class ProductRepository : GenericRepository<Product>, IProductRepository
 {
+    public ProductRepository(ApplicationContext context) : base(context) { }
 }

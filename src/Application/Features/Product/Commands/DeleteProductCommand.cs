@@ -1,5 +1,14 @@
-﻿namespace Application.Features.Product.Commands;
+﻿using FluentValidation;
+using MediatR;
 
-public class DeleteProductCommand
+namespace Application.Features.Product.Commands;
+
+public record DeleteProductCommand(Guid Id, string DeletedBy) : IRequest<Unit>;
+
+public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommand>
 {
+    public DeleteProductCommandValidator()
+    {
+        
+    }
 }

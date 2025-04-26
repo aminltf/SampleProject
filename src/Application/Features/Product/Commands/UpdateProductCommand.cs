@@ -1,5 +1,15 @@
-﻿namespace Application.Features.Product.Commands;
+﻿using Application.Features.Product.Dtos;
+using FluentValidation;
+using MediatR;
 
-public class UpdateProductCommand
+namespace Application.Features.Product.Commands;
+
+public record UpdateProductCommand(Guid Id, string Name, decimal Price, string Description, string ModifiedBy) : IRequest<ProductDto>;
+
+public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
 {
+    public UpdateProductCommandValidator()
+    {
+        
+    }
 }

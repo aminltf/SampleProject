@@ -1,5 +1,7 @@
-﻿namespace Application.Common.Services;
+﻿using Application.Common.Interfaces.Services;
 
-public class ProductService
+namespace Application.Common.Services;
+
+public class ProductService : IProductService
 {
 }

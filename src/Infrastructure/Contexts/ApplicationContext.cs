@@ -1,5 +1,18 @@
-﻿namespace Infrastructure.Contexts;
+﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
-public class ApplicationContext
+namespace Infrastructure.Contexts;
+
+public class ApplicationContext : DbContext
 {
+    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
+
+    public DbSet<Product> Products { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
+    }
 }

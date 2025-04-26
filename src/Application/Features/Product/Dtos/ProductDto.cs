@@ -1,5 +1,13 @@
-﻿namespace Application.Features.Product.Dtos;
+﻿using FluentValidation;
 
-public record ProductDto
+namespace Application.Features.Product.Dtos;
+
+public record ProductDto(Guid Id, string Name, decimal Price, string Description);
+
+public class ProductDtoValidator : AbstractValidator<ProductDto>
 {
+    public ProductDtoValidator()
+    {
+        
+    }
 }

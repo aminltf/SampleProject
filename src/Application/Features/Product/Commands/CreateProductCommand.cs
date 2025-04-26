@@ -1,5 +1,15 @@
-﻿namespace Application.Features.Product.Commands;
+﻿using Application.Features.Product.Dtos;
+using FluentValidation;
+using MediatR;
 
-public class CreateProductCommand
+namespace Application.Features.Product.Commands;
+
+public record CreateProductCommand(string Name, decimal Price, string Description, string CreatedBy) : IRequest<ProductDto>;
+
+public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {
+    public CreateProductCommandValidator()
+    {
+        
+    }
 }

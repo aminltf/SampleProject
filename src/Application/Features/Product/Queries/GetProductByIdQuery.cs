@@ -1,5 +1,6 @@
-﻿namespace Application.Features.Product.Queries;
+﻿using Application.Features.Product.Dtos;
+using MediatR;
 
-public class GetProductByIdQuery
-{
-}
+namespace Application.Features.Product.Queries;
+
+public record GetProductByIdQuery(Guid Id, bool IncludeDeleted = false) : IRequest<ProductDto>;

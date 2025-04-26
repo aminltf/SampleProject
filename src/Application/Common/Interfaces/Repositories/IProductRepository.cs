@@ -1,5 +1,7 @@
-﻿namespace Application.Common.Interfaces.Repositories;
+﻿using Domain.Entities;
 
-public interface IProductRepository
+namespace Application.Common.Interfaces.Repositories;
+
+public interface IProductRepository : IGenericRepository<Product>
 {
 }
