@@ -1,26 +1,26 @@
 ﻿using Application.Common.Interfaces.Repositories;
 using Application.Common.Models.Pagination;
-using Application.Features.Product.Dtos;
+using Application.Features.Category.Dtos;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Features.Product.Queries.Handlers;
+namespace Application.Features.Category.Queries.Handlers;
 
-public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, PageResponse<ProductDto>>
+public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuery, PageResponse<CategoryDto>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public GetAllProductsQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public GetAllCategoriesQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
 
-    public async Task<PageResponse<ProductDto>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
+    public async Task<PageResponse<CategoryDto>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
     {
-        var query = _unitOfWork.Product.AsQueryable().AsNoTracking();
+        var query = _unitOfWork.Category.AsQueryable().AsNoTracking();
 
         // Pagination
         var totalCount = await query.CountAsync(cancellationToken);
@@ -28,8 +28,8 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, P
             .Skip((request.Pagination.PageNumber - 1) * request.Pagination.PageSize)
             .Take(request.Pagination.PageSize)
             .ToListAsync(cancellationToken);
-        var dtoList = _mapper.Map<List<ProductDto>>(items);
-        return new PageResponse<ProductDto>
+        var dtoList = _mapper.Map<List<CategoryDto>>(items);
+        return new PageResponse<CategoryDto>
         {
             Items = dtoList,
             TotalCount = totalCount,

@@ -14,7 +14,7 @@ public class RestoreProductCommandHandler : IRequestHandler<RestoreProductComman
 
     public async Task<Unit> Handle(RestoreProductCommand request, CancellationToken cancellationToken)
     {
-        await _unitOfWork.Products.RestoreAsync(request.Id, cancellationToken);
+        await _unitOfWork.Product.RestoreAsync(request.Id, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }

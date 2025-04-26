@@ -16,6 +16,8 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
             .HasMaxLength(100)
             .IsRequired();
 
+        builder.HasIndex(p => p.Name).IsUnique();
+
         builder.Property(p => p.Price)
             .HasColumnType("decimal(18, 2)")
             .IsRequired();
@@ -23,5 +25,10 @@ public class ProductConfig : IEntityTypeConfiguration<Product>
         builder.Property(p => p.Description)
             .HasMaxLength(300)
             .IsRequired();
+
+        builder.HasOne(p => p.Category)
+            .WithMany(c => c.Products)
+            .HasForeignKey(p => p.CategoryId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

@@ -12,13 +12,15 @@ public class UnitOfWork : IUnitOfWork
     private readonly ApplicationContext _context;
     private Hashtable _repositories;
 
-    public UnitOfWork(ApplicationContext context, IProductRepository products)
+    public UnitOfWork(ApplicationContext context, IProductRepository products, ICategoryRepository category)
     {
         _context = context;
-        Products = products;
+        Product = products;
+        Category = category;
     }
 
-    public IProductRepository Products { get; }
+    public IProductRepository Product { get; }
+    public ICategoryRepository Category { get; }
 
     public async ValueTask DisposeAsync()
     {

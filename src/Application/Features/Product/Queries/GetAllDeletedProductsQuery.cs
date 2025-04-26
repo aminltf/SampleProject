@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Features.Product.Queries;
 
-public record GetAllDeletedProductsQuery : IRequest<PageResponse<ProductDto>>
+public class GetAllDeletedProductsQuery : IRequest<PageResponse<ProductDto>>
 {
     public PageRequest Pagination { get; set; } = new();
 }

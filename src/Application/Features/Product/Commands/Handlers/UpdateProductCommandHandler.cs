@@ -19,7 +19,7 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
 
     public async Task<ProductDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
-        var product = await _unitOfWork.Products.GetByIdAsync(request.Id, cancellationToken);
+        var product = await _unitOfWork.Product.GetByIdAsync(request.Id, cancellationToken);
 
         if (product is null) throw new NotFoundException($"Product with ID {request.Id} was not found.");
 
@@ -28,7 +28,7 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
         product.Price = request.Price;
         product.Description = request.Description;
 
-        await _unitOfWork.Products.UpdateAsync(product, cancellationToken);
+        await _unitOfWork.Product.UpdateAsync(product, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return _mapper.Map<ProductDto>(product);
     }

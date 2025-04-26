@@ -2,7 +2,6 @@
 using Application.Common.Models.Pagination;
 using Application.Features.Product.Dtos;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +20,7 @@ public class GetAllDeletedProductsQueryHandler : IRequestHandler<GetAllDeletedPr
 
     public async Task<PageResponse<ProductDto>> Handle(GetAllDeletedProductsQuery request, CancellationToken cancellationToken)
     {
-        var query = _unitOfWork.Products.AsQueryable(includeDeleted: true)
+        var query = _unitOfWork.Product.AsQueryable(includeDeleted: true)
             .Where(x => x.IsDeleted)
             .AsQueryable();
 
